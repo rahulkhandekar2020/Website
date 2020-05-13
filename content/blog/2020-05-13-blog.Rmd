@@ -1,0 +1,27 @@
+---
+title: Blog
+author: Rahul Khandekar
+date: '2020-05-13'
+slug: blog
+categories: []
+tags: []
+description: ''
+---
+
+Here is some code from r and python.
+```{r}
+library(reticulate)
+hi<-"Hello"
+```
+
+
+```{python}
+import re
+"world"
+hi="world"
+print(r.hi,hi)
+string1="We have to extract these numbers 12, 47, 48 The integers numbers are also interesting: 189 2036 314\',\' is a separator, so please extract these numbers 125,789,1450 and also these 564,90456 We like to offer you 7890$ per month in order to complete this task... we are joking"
+print(string1)
+re.findall(r"[0-9]+",string1)
+```
+Here is a picture I took in Iceland last summer!![](/blog/2020-05-13-blog_files/picture.PNG)

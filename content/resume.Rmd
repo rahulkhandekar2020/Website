@@ -1,0 +1,44 @@
+---
+title: "Resume"
+author: "Rahul Khandekar"
+date: "5/13/2020"
+output: html_document
+---
+
+	RAHUL KHANDEKAR
+214-991-0502 
+rahul.khandekar@gmail.com
+
+EDUCATION
+University of Texas at Austin,  Austin, TX  (Graduating May 2020)                                        
+BSA BIOLOGY
+Cumulative GPA: 3.87
+MCAT Score: 519 (97th percentile)
+Chem/Phys: 131 (99th percentile)
+CARS: 128 (89th percentile)
+Bio/Biochem: 130 (96th percentile)
+Psych/Soc: 130 (95th percentile)
+CNS Honors (Top 20% GPA in College of Natural Sciences)
+
+LEADERSHIP
+University of Texas at Austin,  Austin, TX                                          
+Chemistry Peer Learning Assistant                                                                               Fall 2018
+Assisted the professor in teaching Introductory Chemistry to freshmen. I learned about applying the concepts I have learned and how to explain it to people in a variety of ways. This has helped me develop unique teaching techniques to students who may struggle comprehending certain topics.
+Texas Wranglers,  Austin, TX                                                                                       Fall 2018 
+Led a service project to raise $3,500 dollars for Alzheimer’s Texas. This money was used to serve patients and families affected by this disease, and the funds went towards caregiving, giving support to the families, and educating people about the disease.
+	PREVIOUS RESEARCH AND LAB EXPERIENCE
+University of Texas at Austin;     Austin, TX                                        Fall 2017-- Summer 2018 
+Isolated dorsal root ganglia from lab rats using dissection techniques. Made various solutions used in the dissections and the subsequent TRP V1 channel purifications. Learned how to do Western blots and use them in protein analysis. Utilized pipetting and stoichiometry techniques for cell culture use.
+University of Texas at Dallas;     Dallas, TX                                                          Summer 2015                   
+Researched heating and cooling properties of nanotubes used in disease detection. This could be used to find specific proteins in microscopic tubes that could prove to detect diseases quicker and cheaper than conventional methods.
+University of Texas at Austin;     Austin, TX                                                             Spring 2017                                  
+CH 204 (Chemistry Lab). Used Qualtrics and LoggerPro for data collection and analysis. Learned how to titrate, perform chemical reactions, analyze data, create and determine complex compounds, and identify certain chemical markers. Grade earned: A
+
+	EXTRACURRICULAR ACTIVITIES
+Physician Shadowing;                                     Dallas, TX       July 10 2017 – August 12 2017
+Dr. Praveena Jyothinagaram M.D: Specializes in Nephrology and Hypertension at Texas Health Presbyterian Hospital
+Dr. Anil Nanda M.D: Allergist at the Asthma and Allergy Center 
+Children’s Health Shadowing;                        Dallas, TX        June 1 2015 – August 20 2015
+Shadowed Surgeons in pediatric surgery and in the neonatal intensive care unit
+Children’s Health Junior Leadership Board; Dallas, TX                   Fall 2014 – Spring 2016
+Fundraised for Children’s Health in Dallas to allow underprivileged families afford childcare for their children. Also, we taught preventative education in these communities to prevent unnecessary accidents from happening. (Ex: preventing drowning, booster seat safety)

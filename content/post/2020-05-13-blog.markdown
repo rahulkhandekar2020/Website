@@ -1,0 +1,35 @@
+---
+title: Blog
+author: Rahul Khandekar
+date: '2020-05-13'
+slug: blog
+categories: []
+tags: []
+description: ''
+---
+
+
+```r
+library(reticulate)
+hi<-"Hello"
+```
+
+
+
+```python
+import re
+"world"
+```
+
+```
+## 'world'
+```
+
+```python
+hi="world"
+print(r.hi,hi)
+```
+
+```
+## Hello world
+```

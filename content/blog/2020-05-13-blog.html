@@ -1,0 +1,27 @@
+---
+title: Blog
+author: Rahul Khandekar
+date: '2020-05-13'
+slug: blog
+categories: []
+tags: []
+description: ''
+---
+
+
+
+<p>Here is some code from r and python.</p>
+<pre class="r"><code>library(reticulate)
+hi&lt;-&quot;Hello&quot;</code></pre>
+<pre class="python"><code>import re
+&quot;world&quot;</code></pre>
+<pre><code>## &#39;world&#39;</code></pre>
+<pre class="python"><code>hi=&quot;world&quot;
+print(r.hi,hi)</code></pre>
+<pre><code>## Hello world</code></pre>
+<pre class="python"><code>string1=&quot;We have to extract these numbers 12, 47, 48 The integers numbers are also interesting: 189 2036 314\&#39;,\&#39; is a separator, so please extract these numbers 125,789,1450 and also these 564,90456 We like to offer you 7890$ per month in order to complete this task... we are joking&quot;
+print(string1)</code></pre>
+<pre><code>## We have to extract these numbers 12, 47, 48 The integers numbers are also interesting: 189 2036 314&#39;,&#39; is a separator, so please extract these numbers 125,789,1450 and also these 564,90456 We like to offer you 7890$ per month in order to complete this task... we are joking</code></pre>
+<pre class="python"><code>re.findall(r&quot;[0-9]+&quot;,string1)</code></pre>
+<pre><code>## [&#39;12&#39;, &#39;47&#39;, &#39;48&#39;, &#39;189&#39;, &#39;2036&#39;, &#39;314&#39;, &#39;125&#39;, &#39;789&#39;, &#39;1450&#39;, &#39;564&#39;, &#39;90456&#39;, &#39;7890&#39;]</code></pre>
+<p>Here is a picture I took in Iceland last summer!<img src="/blog/2020-05-13-blog_files/picture.PNG" /></p>
