@@ -1,0 +1,1 @@
+"0","ggplot() +geom_qq(aes(sample=rdl)) + geom_qq_line(aes(sample=rdl))"

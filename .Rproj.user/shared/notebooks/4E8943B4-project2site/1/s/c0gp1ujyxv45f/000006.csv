@@ -1,0 +1,6 @@
+"0","sample1 <-replicate(5000, {"
+"0","  btstrp <-data_3[sample(nrow(data_3),replace = TRUE),]"
+"0","  fitline <-lm(bmi ~ ht*wt, data=btstrp)"
+"0","  coef(fitline)"
+"0","})"
+"0","sample1 %>%t%>%as.data.frame() %>% summarize_all(sd)"

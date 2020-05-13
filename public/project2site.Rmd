@@ -1,0 +1,159 @@
+---
+title: "Rahul Khandekar"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+#0
+```{r}
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(cluster)
+library(ggplot2)
+library(lmtest)
+library(sandwich)
+library(vegan)
+library(tidyverse)
+library(dplyr)
+select<-dplyr::select
+data_1<-read.csv("data 1.csv")
+data_2<-read.csv("data 2.csv")
+data_2 %>% inner_join(data_1, by="ï..ID") %>% na.omit() %>% glimpse()
+data_3 <- data_2 %>% inner_join(data_1, by="ï..ID") %>% na.omit() %>% glimpse()
+nrow(data_3)
+ncol(data_3)
+```
+
+I used the "ais" dataset, which has physical characteristics of Australian athletes and divides them on the sport they play. I broke the dataset into two separate datasets, and then I used an "inner join" function to merge them together.
+There are 12 numerical variables (physical characteristics) and 2 categorical variables (sport type and sex). The "sex" variable was treated as a binary variable with males and females as the two options which can be used. BMI was used as a numerical variable, and this refers to an athlete's body mass index. "Ht" refers to the height of an athlete, and "wt" refers to the weight of an athlete. The categorical variable of "sport" indicates which sport an athlete competed in.
+
+#1
+```{r}
+gg3<-ggplot(data_3, aes(x = ht, y = wt)) + geom_point(alpha = .5) + geom_density_2d(h=2) + coord_fixed() + facet_wrap(~bmi)
+manva<-manova(cbind(ht,wt)~sport, data=data_3)
+summary(manva)
+summary.aov(manva)
+manva6<-manova(cbind(ht,wt)~sex, data=data_3)
+summary(manva6)
+summary.aov(manva6)
+data_3%>% group_by(sport)%>% summarise(mean(ht),mean(wt))
+data_3%>% group_by(sex)%>% summarise(mean(ht),mean(wt))
+1-(.95)^3
+.05/3
+```
+
+After running a MANOVA test across two numeric variables, height “ht” and weight “wt”, there was a significant difference found across the categorical variables of sport “sport” and gender “sex”. The null hypothesis is that there is not a significant difference for height or weight for the categorical variables. The alternate hypothesis is that there is a significant difference between the variables for height and weight. By running a MANOVA test, we assume that samples are observed independently, there are no multivariate outliers, there is a sample size of at least 25, and there is no collinearity. The assumptions were probably not all met, as there are outliers since it is a comprehensive record of all Australian athletes. The summary statistics show that there is a significant difference between at least one of the groups. Because of this, a post hoc test was run to see which groups differed and if multiple groups did, how many of them differed. The p value of (<2.2e-16) shows there is a significant difference. The height “ht” and weight “wt” numeric variables both had significant differences across the gender “sex” binomial variable. Therefore, the null hypothesis that there is no significant difference across genders for height or weight is rejected. The same test was run but with sport as the categorical variable, and the null hypothesis was rejected once again with a p values of <2.2e-16. After this, the probability of a type one error was found. Because three tests were run, the equation of 1-(.95)^3 gave the probability of a type one error as 0.142625. Neither of the ANOVA tests support the null hypothesis as they both gave p values below  2.2e-16. I then did a bonferroni correction and this equation is given by 0.05/3= 0.01666667. Both of the tests still reject the null hypothesis as p < 2.2e-16 is less than 0.017. Therefore, the MANOVA and ANOVA tests gave the same result of significant differences between height and weight across sexes.
+
+#2
+```{r}
+ggplot(data_3,aes(bmi,fill= wt+ht+(wt*ht)))+geom_histogram(bins=10)
+ggplot(data_3,aes(wt,fill= sex))+geom_histogram(bins=10)
+ggplot(data_3,aes(ht,fill= sex))+geom_histogram(bins=10)
+d1 <- data_3%>%select(ht,wt)%>%dist()
+library(vegan)
+adonis(d1~sex,data=data_3)
+linearMod <- lm(ht ~ wt, data=data_3)
+r1<-lm(bmi~ht, data=data_3)$residuals
+r2<-lm(bmi~wt,data=data_3)$residuals
+coef(lm(r1~r2))
+coef(lm(bmi~ht*wt,data=data_3))
+linearMod
+summary(linearMod)
+ggplot(data=data_3,aes(x=ht,y=wt,color=sex))+geom_point()+geom_smooth(method="lm",se=FALSE)
+library(lmtest)
+library(sandwich)
+bptest(linearMod)
+ftvl <-linearMod$fitted.values
+rdl <-linearMod$residuals
+ggplot()+geom_histogram(aes(rdl),bins = 30)
+ggplot() +geom_qq(aes(sample=rdl)) + geom_qq_line(aes(sample=rdl))
+ggplot()+geom_point(aes(ftvl,rdl))+geom_hline(yintercept = 0, color='blue')
+summary(linearMod)$coef[,1:2]
+```
+
+The null hypothesis is that there is not a significant difference between the two genders for height and weight, and the alternate hypothesis is that there is a significant difference between the two sexes for height and weight. I ran a permanova test to analyze the multivariate data, and with a p value of 0.001, the null hypothesis is rejected.
+
+#3
+```{r}
+library(lmtest)
+library(sandwich)
+data_3$ht<-data_3$ht-mean(data_3$ht)
+data_3$wt<-data_3$wt-mean(data_3$wt)
+newfit <-lm(bmi ~ ht*wt,data = data_3)
+summary(newfit)
+bptest(newfit)
+newvales <-newfit$fitted.values
+newresiduals <- newfit$residuals
+summary(linearMod)$coef[,1:2]
+ggplot()+geom_histogram(aes(newresiduals),bins = 30)
+ggplot()+geom_point(aes(newvales,newresiduals))+geom_hline(yintercept = 0, color='orange')
+coeftest(newfit,vcov =vcovHC(newfit))[,1:2]
+summary(newfit)
+summary(newfit)
+```
+After mean centering the numeric variables and finding the coefficients, the data came out with a y intercept of 2.316e+01. This means that when the weight and height of an athlete are 0, the expected bmi is 2.316e+01. For every unit increase in weight, the bmi also increases by 3.077e-01 units. When the height increases by a unit, the bmi actually decreases by  2.501e-01 units. This could be because of associations and not necessarily causations. Additionally, it was also found that the bmi of an athlete decreases by 1.920e-03 units for the interaction between height and weight.
+Pertaining to the assumptions of linearity, normality, and homoskedasticity, linearity and homoskedasticity are not met due to the variance in the graphs above. Normality looks to be met due to the bell curve shape of the graph. The Bptest function further supports that homoskedasticity is not met. The “coeftest” function was run to find standard errors, and the error is larger with this function.  The errors are (int= 0.0113, ht= 0.003, wt=0.002, and ht*wt=0.000119). Height explains 0.250 variation, weight explains 0.308 of the variation, and their interaction only explains 0.00192 of the variation.
+
+#4
+```{r}
+sample1 <-replicate(5000, {
+  btstrp <-data_3[sample(nrow(data_3),replace = TRUE),]
+  fitline <-lm(bmi ~ ht*wt, data=btstrp)
+  coef(fitline)
+})
+sample1 %>%t%>%as.data.frame() %>% summarize_all(sd)
+```
+
+The bootstrapped standard errors are (intercept=0.01010906, ht=0.002410436, wt=0.00174591, ht*wt=9.92128e-05). They are similar to the standard errors found previously, but the standard errors are lower for the interaction between height and weight but greater for the intercept, the height, and the weight compared to the previous model.
+
+#5
+```{r}
+diags<-NULL
+data_3$sex1=ifelse(data_3$sex=='female', 1, 0)
+logitMod <- glm(sex1 ~ ht + wt, data=data_3, family=binomial(link="logit"))
+summary(logitMod)
+coeftest(logitMod)
+exp(coef(logitMod))
+guess1 <-predict(logitMod,data=data_3,type="response")
+data_3$predict <-predict(logitMod,data=data_3,type="response")
+table(predict=as.numeric(data_3$predict>.5),truth=data_3$sex)%>%addmargins
+
+#confusion matrix above
+#sensitivity
+76/102
+#accuracy
+(81+76)/202
+#specifity
+81/107
+#PPV
+76/95
+library(plotROC)
+library(ROCR)
+ROCcurves<- ggplot(data_3) + geom_roc(aes(d=bmi,m=predict),n.cuts = 0)
+data_4 <- data_3 %>% mutate(prob=predict(logitMod,type="response"), prediction = ifelse(prob>.5,1,0))
+class <- data_4 %>% transmute(prob,predict,truth=sex)
+ROC <-ggplot(class)+geom_roc(aes(d=truth,m=prob),n.cuts = 0)+geom_segment(aes(x=0,xend=1,y=0,yend=1),lty=2)
+ROC
+calc_auc(ROC)
+```
+
+The binary categorical variable is gender or “sex”. For the coefficient estimates, for every unit increase in height, the probability of an Australian athlete being male increases by 0.12276095. For every increase in weight, the probability of an athlete being male increases by 0.06215562. The sensitivity from the model was 0.745098, the accuracy is 0.7772277, and the specificity is 0.7570093. Specificity is the proportion of the negatives that are correctly identified, sensitivity is the proportion of positives that are correctly identified, and accuracy is the proportion of actual elements that are the same as the estimated ones. The PPV gives the percent of estimated "male" counts that are actually male, and this value is 0.8. The AUC value was 0.850098. An ROC curve was generated, and after a repeated random sub sampling CV was unable to be performed.
+
+#6
+```{r}
+
+
+```
+
+I had issues on my computer and couldn't get it fixed due to shops being closed.
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.

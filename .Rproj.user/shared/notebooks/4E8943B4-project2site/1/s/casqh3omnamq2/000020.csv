@@ -1,0 +1,1 @@
+"0","ggplot(data_3,aes(wt,fill= sex))+geom_histogram(bins=10)"

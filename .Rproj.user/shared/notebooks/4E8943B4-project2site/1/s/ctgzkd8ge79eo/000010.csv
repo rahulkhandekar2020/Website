@@ -1,0 +1,1 @@
+"0","data_3%>% group_by(sex)%>% summarise(mean(ht),mean(wt))"

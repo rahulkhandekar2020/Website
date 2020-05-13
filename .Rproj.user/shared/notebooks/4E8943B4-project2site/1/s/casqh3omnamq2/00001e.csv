@@ -1,0 +1,1 @@
+"0","ggplot(data_3,aes(bmi,fill= wt+ht+(wt*ht)))+geom_histogram(bins=10)"

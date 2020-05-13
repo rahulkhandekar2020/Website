@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1589324925413.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "255B65E4",
+    "lastKnownWriteTime" : 1589336954,
+    "last_content_update" : 1589336954805,
+    "path" : "~/websiterahul/content/project2site.Rmd",
+    "project_path" : "content/project2site.Rmd",
+    "properties" : {
+        "cursorPosition" : "138,30",
+        "scrollLine" : "112"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
